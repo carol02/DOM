@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 50px;
+				height: 50px;
+				background: red;
+				position: absolute;
+				top: 0;
+			}
+		</style>
+		<script type="text/javascript" src="tween.js"></script>
+		<script type="text/javascript" src="mTween.js"></script>
+	</head>
+	<body>
+		<script>
+		//生成div
+			var ten=12;
+			var str='';
+			var left1=55;
+			for (var i=0;i<ten;i++) {
+				str+='<div style="left:'+left1*i+'px;"></div>'
+			}
+			document.body.innerHTML=str;
+			var divs=document.getElementsByTagName('div')
+			var target = 200;//运动目标点
+			for (var i=0;i<divs.length;i++) {
+				divs[i].onclick=function(){	
+					//获取点击的div的i值
+					var num=this.offsetLeft/left1 
+					var num1=this.offsetLeft/left1
+					//被点击的div的右边div的运动
+					setInterval(function(){
+						if(num>=divs.length){
+							return
+						}else{
+							mTween(divs[num],'top',target,500,'linear');
+							num++;
+						}
+					},100)
+					//被点击的div的左边div的运动
+					setInterval(function(){
+						if(num1<0){
+							return
+							clearInterval(timer1)
+						}else{
+							mTween(divs[num1],'top',target,500,'linear');
+							num1--;
+						}
+					},100)
+				}
+			}
+		</script>
+	</body>
+</html>
